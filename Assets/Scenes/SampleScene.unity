@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 4900387}
   - component: {fileID: 4900386}
   m_Layer: 5
-  m_Name: ActiveText
+  m_Name: BombActiveText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -723,7 +723,7 @@ GameObject:
   - component: {fileID: 701099095}
   - component: {fileID: 701099094}
   m_Layer: 5
-  m_Name: SpawnedText
+  m_Name: BombSpawnedText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -956,7 +956,7 @@ GameObject:
   - component: {fileID: 723797768}
   - component: {fileID: 723797767}
   m_Layer: 5
-  m_Name: SpawnedText
+  m_Name: CubeSpawnedText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1742,7 +1742,7 @@ GameObject:
   - component: {fileID: 1307163043}
   - component: {fileID: 1307163042}
   m_Layer: 5
-  m_Name: CreatedText
+  m_Name: CubeCreatedText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1878,7 +1878,7 @@ GameObject:
   - component: {fileID: 1747537818}
   - component: {fileID: 1747537817}
   m_Layer: 5
-  m_Name: CreatedText
+  m_Name: BombCreatedText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2105,7 +2105,7 @@ GameObject:
   - component: {fileID: 1864242726}
   - component: {fileID: 1864242725}
   m_Layer: 5
-  m_Name: ActiveText
+  m_Name: CubeActiveText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

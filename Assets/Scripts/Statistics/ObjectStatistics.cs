@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "ObjectStatistics", menuName = "Scriptable Objects/Statistic")]
 public class ObjectStatistics : ScriptableObject
 {
     [SerializeField] private int _spawnedCount = 0;
