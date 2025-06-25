@@ -4,15 +4,18 @@ using UnityEngine.Pool;
 public class ExplosionHandler : MonoBehaviour
 {
     [SerializeField] private BombSpawner _bombSpawner;
+    [SerializeField] private CommonPool<Cube> _cubePool;
 
     private void OnEnable()
     {
-        CommonPool<Cube>.OnItemReleased += HandleCubeReleased;
+        if (_cubePool != null)
+            _cubePool.OnItemReleased += HandleCubeReleased;
     }
 
     private void OnDisable()
     {
-        CommonPool<Cube>.OnItemReleased -= HandleCubeReleased;
+        if (_cubePool != null)
+            _cubePool.OnItemReleased -= HandleCubeReleased;
     }
 
     private void HandleCubeReleased(Cube cube)

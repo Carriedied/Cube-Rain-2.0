@@ -1,42 +1,37 @@
+using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ObjectStatistics", menuName = "Scriptable Objects/Statistic")]
-public class ObjectStatistics : ScriptableObject
+public class ObjectStatistics : MonoBehaviour
 {
-    [SerializeField] private int _spawnedCount = 0;
-    [SerializeField] private int _createdCount = 0;
-    [SerializeField] private int _activeCount = 0;
+    public int SpawnedCount { get; private set; }
+    public int CreatedCount { get; private set; }
+    public int ActiveCount { get; private set; }
 
-    public int SpawnedCount => _spawnedCount;
-    public int CreatedCount => _createdCount;
-    public int ActiveCount => _activeCount;
-
-    public event System.Action OnStatsUpdated;
+    public event Action OnStatsUpdated;
 
     public void AddSpawned()
     {
-        _spawnedCount++;
+        SpawnedCount++;
         OnStatsUpdated?.Invoke();
     }
 
     public void AddCreated()
     {
-        _createdCount++;
+        CreatedCount++;
         OnStatsUpdated?.Invoke();
     }
 
-    public void SetActive(int count)
+    public void UpdateActiveCount(int count)
     {
-        _activeCount = count;
+        ActiveCount = count;
         OnStatsUpdated?.Invoke();
     }
 
     public void ResetStats()
     {
-        _spawnedCount = 0;
-        _createdCount = 0;
-        _activeCount = 0;
-
+        SpawnedCount = 0;
+        CreatedCount = 0;
+        ActiveCount = 0;
         OnStatsUpdated?.Invoke();
     }
 }

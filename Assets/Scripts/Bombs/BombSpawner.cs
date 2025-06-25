@@ -1,18 +1,11 @@
 using UnityEngine;
 
-public class BombSpawner : MonoBehaviour
+public class BombSpawner : ObjectSpawner<Bomb>
 {
-    [SerializeField] private BombPool _pool;
+    [SerializeField] private ObjectSpawner<Bomb> _spawner;
 
-    public Bomb SpawnBomb(Vector3 position)
+    public void SpawnBomb(Vector3 position)
     {
-        Bomb bomb = _pool.GetObject();
-
-        bomb.transform.position = position;
-
-        bomb.Reset();
-        bomb.StartFading();
-
-        return bomb;
+        _spawner.SpawnAtPosition(position);
     }
 }

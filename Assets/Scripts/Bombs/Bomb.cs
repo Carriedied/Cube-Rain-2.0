@@ -25,6 +25,12 @@ public class Bomb : MonoBehaviour, IPoolable<Bomb>
         _renderer = GetComponent<Renderer>();
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        Reset();
+        StartFading();
+    }
+
     public void Reset()
     {
         _renderer.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);

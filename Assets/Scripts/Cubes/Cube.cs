@@ -46,6 +46,7 @@ public class Cube : MonoBehaviour, IPoolable<Cube>
         if (_disappearCoroutine != null)
         {
             StopCoroutine(_disappearCoroutine);
+
             _disappearCoroutine = null;
         }
 

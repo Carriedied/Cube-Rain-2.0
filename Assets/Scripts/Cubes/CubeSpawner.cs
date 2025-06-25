@@ -1,41 +1,25 @@
 using UnityEngine;
 
-public class CubeSpawner : MonoBehaviour
+public class CubeSpawner : ObjectSpawner<Cube>
 {
-    [SerializeField] private CubePool _pool;
     [SerializeField] private Transform _platform;
 
-    private float _amountTimeStart = 1f;
-    private float _spawnInterval = 1f;
+    private float _maxY = 15f;
 
     private void Start()
     {
-        InvokeRepeating(nameof(SpawnCube), _amountTimeStart, _spawnInterval);
+        SetSpawnPositionProvider(DetermineSpawnPoint);
     }
 
-    private void SpawnCube()
+    private Vector3 DetermineSpawnPoint()
     {
-        Cube cube = _pool.GetObject();
-
-        cube.transform.position = DetermineSpawnPoints();
-    }
-
-    private Vector3 DetermineSpawnPoints()
-    {
-        Vector3 spawnPoint;
         float valueBisection = 2f;
 
-        float minValueXAxis = _platform.transform.position.x - (_platform.transform.localScale.x / valueBisection);
-        float maxValueXAxis = _platform.transform.position.x + (_platform.transform.localScale.x / valueBisection);
-        float minValueZAxis = _platform.transform.position.z - (_platform.transform.localScale.z / valueBisection);
-        float maxValueZAxis = _platform.transform.position.z + (_platform.transform.localScale.z / valueBisection);
+        float minX = _platform.position.x - (_platform.localScale.x / valueBisection);
+        float maxX = _platform.position.x + (_platform.localScale.x / valueBisection);
+        float minZ = _platform.position.z - (_platform.localScale.z / valueBisection);
+        float maxZ = _platform.position.z + (_platform.localScale.z / valueBisection);
 
-        float valueAlongYAxis = 15;
-
-        spawnPoint.x = Random.Range(minValueXAxis, maxValueXAxis + 1);
-        spawnPoint.z = Random.Range(minValueZAxis, maxValueZAxis + 1);
-        spawnPoint.y = valueAlongYAxis;
-
-        return spawnPoint;
+        return new Vector3(Random.Range(minX, maxX), _maxY, Random.Range(minZ, maxZ));
     }
 }

@@ -10,7 +10,7 @@ public class CommonPool<T> : MonoBehaviour where T : MonoBehaviour, IPoolable<T>
     [SerializeField] private int _poolMaxSize = 20;
     [SerializeField] private ObjectStatistics _statistics;
 
-    public static event Action<T> OnItemReleased;
+    public event Action<T> OnItemReleased;
 
     private ObjectPool<T> _pool;
 
@@ -34,7 +34,7 @@ public class CommonPool<T> : MonoBehaviour where T : MonoBehaviour, IPoolable<T>
 
         _pool.Release(item);
 
-        _statistics.SetActive(_pool.CountActive);
+        _statistics.UpdateActiveCount(_pool.CountActive);
     }
 
     public T GetObject()
@@ -55,7 +55,7 @@ public class CommonPool<T> : MonoBehaviour where T : MonoBehaviour, IPoolable<T>
 
         item.gameObject.SetActive(true);
 
-        _statistics.SetActive(_pool.CountActive);
+        _statistics.UpdateActiveCount(_pool.CountActive);
         _statistics.AddSpawned();
     }
 
@@ -63,15 +63,18 @@ public class CommonPool<T> : MonoBehaviour where T : MonoBehaviour, IPoolable<T>
     {
         item.gameObject.SetActive(false);
 
-        _statistics.SetActive(_pool.CountActive);
+        _statistics.UpdateActiveCount(_pool.CountActive);
 
-        OnItemReleased?.Invoke(item);
+        if (OnItemReleased != null)
+        {
+            OnItemReleased.Invoke(item);
+        }
     }
 
     private void DestroyObject(T item)
     {
         Destroy(item);
 
-        _statistics.SetActive(_pool.CountActive);
+        _statistics.UpdateActiveCount(_pool.CountActive);
     }
 }

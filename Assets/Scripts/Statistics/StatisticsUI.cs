@@ -3,46 +3,30 @@ using UnityEngine;
 
 public class StatisticsUI : MonoBehaviour
 {
-    [SerializeField] private ObjectStatistics _cubeStats;
-    [SerializeField] private ObjectStatistics _bombStats;
+    [SerializeField] private ObjectStatistics _statistics;
+    [SerializeField] private TextMeshProUGUI _spawnedText;
+    [SerializeField] private TextMeshProUGUI _createdText;
+    [SerializeField] private TextMeshProUGUI _activeText;
 
-    [SerializeField] private TextMeshProUGUI _cubeSpawnedText;
-    [SerializeField] private TextMeshProUGUI _cubeCreatedText;
-    [SerializeField] private TextMeshProUGUI _cubeActiveText;
-
-    [SerializeField] private TextMeshProUGUI _bombSpawnedText;
-    [SerializeField] private TextMeshProUGUI _bombCreatedText;
-    [SerializeField] private TextMeshProUGUI _bombActiveText;
+    private void Start()
+    {
+        UpdateUI();
+    }
 
     private void OnEnable()
     {
-        _cubeStats.OnStatsUpdated += UpdateCubeUI;
-        _bombStats.OnStatsUpdated += UpdateBombUI;
+        _statistics.OnStatsUpdated += UpdateUI;
     }
 
     private void OnDisable()
     {
-        _cubeStats.OnStatsUpdated -= UpdateCubeUI;
-        _bombStats.OnStatsUpdated -= UpdateBombUI;
+        _statistics.OnStatsUpdated -= UpdateUI;
     }
 
-    private void Start()
+    private void UpdateUI()
     {
-        UpdateCubeUI();
-        UpdateBombUI();
-    }
-
-    private void UpdateCubeUI()
-    {
-        _cubeSpawnedText.text = $"Spawned: {_cubeStats.SpawnedCount}";
-        _cubeCreatedText.text = $"Created: {_cubeStats.CreatedCount}";
-        _cubeActiveText.text = $"Active: {_cubeStats.ActiveCount}";
-    }
-
-    private void UpdateBombUI()
-    {
-        _bombSpawnedText.text = $"Spawned: {_bombStats.SpawnedCount}";
-        _bombCreatedText.text = $"Created: {_bombStats.CreatedCount}";
-        _bombActiveText.text = $"Active: {_bombStats.ActiveCount}";
+        _spawnedText.text = $"Spawned: {_statistics.SpawnedCount}";
+        _createdText.text = $"Created: {_statistics.CreatedCount}";
+        _activeText.text = $"Active: {_statistics.ActiveCount}";
     }
 }
